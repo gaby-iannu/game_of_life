@@ -3,6 +3,9 @@ package game
 
 import (
 	"context"
+	"game_of_life/game/alive"
+	"game_of_life/game/born"
+	"game_of_life/game/die"
 	"game_of_life/game/ui"
 	"game_of_life/game/utils"
 	"math/rand"
@@ -61,13 +64,44 @@ func trueOrFalse() bool {
 	return false
 }
 
+type apply func(board[][]bool, i, j int) bool
+
+type rule struct {
+	apply apply
+	result bool
+}
+
+var rules []rule = []rule{
+	{
+		apply: born.IsBorn,
+		result: true,
+	},
+	{
+		apply: die.IsDie,
+		result: false,
+	},
+	{
+		apply: alive.IsAlive,
+		result: true,
+	},
+}
+
+func toApply(board *[][]bool, i, j int) {
+
+	for _,r := range rules {
+		if r.apply((*board), i, j) {
+			(*board)[i][j] = r.result
+		}
+	}
+}
+
 func updateValues(c chan [][]bool, board *[][]bool) {
 	c <- *(board)
 	for i := 0; i < utils.ScreenWidth; i++ {
 		for j := 0; j < utils.ScreenHeight; j++ {
-			(*board)[i][j] = trueOrFalse()	
+			toApply(board, i, j)
 		}
 	}
-	time.Sleep(500 * time.Millisecond)
+	time.Sleep(100 * time.Millisecond)
 }
 
