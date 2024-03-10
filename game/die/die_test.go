@@ -201,7 +201,7 @@ func TestIsolation(t *testing.T) {
 	}
 }
 
-func TestDie(t *testing.T) {
+func TestIsDie(t *testing.T) {
 	cases := []struct{
 		name string
 		board [][]bool
@@ -246,7 +246,7 @@ func TestDie(t *testing.T) {
 
 	for _,c := range cases {
 		t.Run(c.name, func(t *testing.T){
-			result := Die(c.board, c.row, c.col)
+			result := IsDie(c.board, c.row, c.col)
 			assert.Equal(t, c.expected, result, "they aren't same")
 		})
 	}

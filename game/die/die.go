@@ -4,7 +4,7 @@ import "game_of_life/game/counter"
 
 // * Muere: Una celula viva puede morir por uno de los 2 casos:
 // overpopulation or isolation
-func Die(board [][]bool, i, j int) bool {
+func IsDie(board [][]bool, i, j int) bool {
 	// Si ya esta muerta no puede morir!
 	if !board[i][j] {
 		return false
