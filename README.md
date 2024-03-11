@@ -15,4 +15,4 @@ horizontally, vertically or diagonally adjacent. At each step in time, the follo
 * Any live cell with more than three live neighbors dies, as if by overpopulation.
 * Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 
-* ![#1589F0] Build entirely  in Go technology.
+$\color{green}{Build entirely in Go technology.}$
